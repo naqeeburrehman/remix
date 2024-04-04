@@ -5,5 +5,9 @@ import { defineConfig } from "vite";
 installGlobals();
 
 export default defineConfig({
-  plugins: [remix()],
+  plugins: [
+    remix({
+      ignoredRouteFiles: ["**/*.css"],
+    }),
+  ],
 });

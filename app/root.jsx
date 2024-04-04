@@ -1,12 +1,10 @@
-import {
-  Links,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-} from "@remix-run/react";
+import { Links, Meta, Outlet, Scripts, ScrollRestoration } from "@remix-run/react";
 
-export function Layout({ children }) {
+export const links = () => [];
+
+export const meta = () => [{ title: "default" }, { name: "description", content: "Welcome to Remix!" }];
+
+const Docuemnt = ({ children }) => {
   return (
     <html lang="en">
       <head>
@@ -15,15 +13,29 @@ export function Layout({ children }) {
         <Meta />
         <Links />
       </head>
-      <body>
-        {children}
-        <ScrollRestoration />
-        <Scripts />
-      </body>
+      <body>{children}</body>
     </html>
   );
-}
+};
 
-export default function App() {
-  return <Outlet />;
-}
+export const ErrorBoundary = ({ error }) => {
+  console.log(error);
+  return (
+    <Document>
+      <h1>Error</h1>
+      <p>{error.message}</p>
+    </Document>
+  );
+};
+
+const App = () => {
+  return (
+    <Docuemnt>
+      <Outlet />
+      <ScrollRestoration />
+      <Scripts />
+    </Docuemnt>
+  );
+};
+
+export default App;
